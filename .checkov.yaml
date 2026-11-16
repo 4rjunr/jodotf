@@ -1,0 +1,18 @@
+# Each skip is a deliberate, documented design decision (see README "Security decisions").
+framework:
+  - terraform
+skip-check:
+  - CKV_AWS_117   # Lambda in VPC: no private resources are accessed; VPC adds NAT cost/latency without benefit
+  - CKV_AWS_116   # Lambda DLQ: ingest is synchronous; persister failures are handled by the SQS redrive DLQ
+  - CKV_AWS_272   # Lambda code signing: optional, enable via AWS Signer if required by policy
+  - CKV_AWS_173   # Lambda env var CMK: environment variables contain no secrets
+  - CKV_AWS_115   # Persister concurrency is bounded by the event source mapping maximum_concurrency
+  - CKV_AWS_120   # API caching: every POST must reach the function
+  - CKV_AWS_225   # API method caching: same as above
+  - CKV_AWS_308   # API cache encryption: caching disabled
+  - CKV2_AWS_51   # API client certificate: no HTTP backend (Lambda proxy only)
+  - CKV_AWS_144   # S3 cross-region replication: single-region by design (see README roadmap)
+  - CKV2_AWS_62   # S3 event notifications: not needed
+  - CKV_AWS_145   # Access-log bucket uses SSE-S3: S3 server access logging does not support SSE-KMS targets
+  - CKV_AWS_18    # Access-log bucket does not log itself
+  - CKV_AWS_338   # Log retention < 1 year: configurable via log_retention_days

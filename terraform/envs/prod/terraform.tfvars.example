@@ -1,0 +1,25 @@
+# Copy to terraform.tfvars (git-ignored) and fill in.
+aws_region     = "ap-south-1"
+aws_account_id = "000000000000"
+environment    = "prod"
+name_prefix    = "reqcap"
+
+api_authorization_type = "AWS_IAM"
+allowed_invoker_arns = [
+  "arn:aws:iam::000000000000:role/example-caller-role",
+]
+
+custom_domain_name = "capture.example.com"
+certificate_arn    = "arn:aws:acm:ap-south-1:000000000000:certificate/00000000-0000-0000-0000-000000000000"
+alarm_email        = "platform-alerts@example.com"
+
+record_retention_days = 365
+log_retention_days    = 90
+
+# Audit-grade immutability (can only be enabled when the bucket is first created):
+# object_lock_retention_days = 365
+# object_lock_mode           = "COMPLIANCE"
+
+ingest_reserved_concurrency = 100
+api_throttle_rate_limit     = 500
+api_throttle_burst_limit    = 1000

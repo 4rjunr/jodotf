@@ -1,0 +1,21 @@
+# Copy to terraform.tfvars (git-ignored) and fill in.
+aws_region     = "ap-south-1"
+aws_account_id = "000000000000"
+environment    = "dev"
+name_prefix    = "reqcap"
+
+api_authorization_type = "AWS_IAM"
+allowed_invoker_arns = [
+  "arn:aws:iam::000000000000:role/example-caller-role",
+]
+
+# allowed_source_cidrs = ["203.0.113.0/24"]
+# custom_domain_name   = "capture.dev.example.com"
+# certificate_arn      = "arn:aws:acm:ap-south-1:000000000000:certificate/..."
+# alarm_email          = "platform-alerts@example.com"
+
+record_retention_days       = 30
+log_retention_days          = 30
+ingest_reserved_concurrency = 20
+api_throttle_rate_limit     = 50
+api_throttle_burst_limit    = 100
